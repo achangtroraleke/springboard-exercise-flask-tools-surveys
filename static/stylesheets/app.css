@@ -1,0 +1,13 @@
+.flex-column{
+    display: flex;
+    flex-direction: column;
+}
+
+.flex{
+    display: flex;
+}
+
+form{
+    gap: 1rem;
+    width: 50%;
+}

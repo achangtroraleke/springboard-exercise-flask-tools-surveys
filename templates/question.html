@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Question {{content['index']}}</h1>
+<form class="flex-column" method="POST" >
+    
+        <h3>{{content['question'].question}}</h3>
+        {% for choice in content['question'].choices %}
+        <div class="choice-group flex">
+            <input required type="radio" value={{choice}} name="answer"/>
+            <label>{{choice}}</label>
+        </div>
+        
+        {% endfor %}
+    <input type="submit" name="Submit"/>
+</form>
+{% endblock %}

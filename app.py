@@ -1,7 +1,8 @@
-from flask import Flask, flash, request, render_template, redirect
+from flask import Flask, flash, request, render_template, redirect, session
 from surveys import satisfaction_survey
 
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "SHHHHHHHHHHH"
 responses = []
 @app.route('/')
 def home():
@@ -10,7 +11,8 @@ def home():
 
 @app.route('/questions/<index>', methods=["GET","POST"] )
 def getQuestion(index):
-   
+    session['answers'] = responses
+    print(session['answers'])
 
     if request.method == "POST":
         responses.append(request.form['answer'])
@@ -25,13 +27,13 @@ def getQuestion(index):
             return redirect('/questions/1')
         else:
             question = satisfaction_survey.questions[int(index)-1]
-
+    
             content = {'index':int(index), 'question':question}
             return render_template('question.html', content=content)
-
+                                                                                                                                                                                                                                                                                
 @app.route('/completed')
 def completed():
-    print(responses)
+    print(responses) 
     return render_template('thanks.html')
 
 
